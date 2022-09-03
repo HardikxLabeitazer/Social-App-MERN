@@ -2,10 +2,10 @@ import React,{useState,useEffect} from 'react'
 import { signin } from '../auth/authapi'
 import './user.css'
 import auth from '../auth/authhelper'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Login = () => {
-
+    const navigate = useNavigate()
     const [user,setUser] = useState({
         email:'',
         password:''
@@ -27,6 +27,7 @@ const Login = () => {
             }else{
                 auth.authenticate(data,()=>{
                     console.log('logged in')
+                    navigate('/')
                 })
             }
         })

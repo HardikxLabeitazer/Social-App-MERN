@@ -8,13 +8,20 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import NavBar from './components/user/NavBar.';
+import ProtectedRoutes from './components/auth/ProtectedRoutes';
 
 function App() {
   return (
    <BrowserRouter>
       <Routes>
-        <Route exact path='/' element={<Login/>}/>
+        <Route exact path='/signin' element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
+        <Route exact path="/" element={<ProtectedRoutes>
+          <NavBar/>
+        </ProtectedRoutes>} >
+
+        </Route>
       </Routes>
    </BrowserRouter>
   );
