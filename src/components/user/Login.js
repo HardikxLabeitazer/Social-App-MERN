@@ -3,9 +3,11 @@ import { signin } from '../auth/authapi'
 import './user.css'
 import auth from '../auth/authhelper'
 import { Link, useNavigate } from 'react-router-dom'
+import { UseOwnerAuth } from '../auth/Userauth'
 
 const Login = () => {
     const navigate = useNavigate()
+    const {verify}= UseOwnerAuth()
     const [user,setUser] = useState({
         email:'',
         password:''
@@ -13,6 +15,11 @@ const Login = () => {
     const handleChange = name =>event=> {
         setUser({...user,[name]:event.target.value})
     }
+    useEffect(()=>{
+        if(auth.isAuthenticated()){
+            navigate('/')
+        }
+    },[])
 
     const handleSubmit=()=>{
         console.log(user)
@@ -27,11 +34,13 @@ const Login = () => {
             }else{
                 auth.authenticate(data,()=>{
                     console.log('logged in')
+                    verify()
                     navigate('/')
                 })
             }
         })
     }
+    
     return (
         <div className='container'>
             <div className='loginbox'>

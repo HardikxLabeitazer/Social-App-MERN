@@ -27,7 +27,6 @@ const list = async()=>{
 }
 
 const read = async(params,credentials)=>{
-
     try{
         let response = await fetch('/api/users/' + params?.userId,{
             method:'GET',

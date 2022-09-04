@@ -10,20 +10,28 @@ import {
 } from "react-router-dom";
 import NavBar from './components/user/NavBar.';
 import ProtectedRoutes from './components/auth/ProtectedRoutes';
+import Profile from './components/user/Profile';
+import Userauth from './components/auth/Userauth';
 
 function App() {
   return (
+   
    <BrowserRouter>
+    <Userauth>
       <Routes>
         <Route exact path='/signin' element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
-        <Route exact path="/" element={<ProtectedRoutes>
-          <NavBar/>
-        </ProtectedRoutes>} >
-
-        </Route>
+        
+      
+          <Route exact path="/" element={<Profile/>}>
+            
+            
+          </Route>
+       
       </Routes>
+       </Userauth>
    </BrowserRouter>
+  
   );
 }
 
