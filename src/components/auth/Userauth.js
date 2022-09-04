@@ -6,7 +6,7 @@ import { read } from '../user/userapi'
 const UserAuthContext = createContext({})
 const Userauth = ({children}) => {
 
-    const {verify,logout} = UseProviderauth();
+    const {verify,logout,userdata,currentUser} = UseProviderauth();
 
     useEffect(()=>{
         if(auth.isAuthenticated()===false){
@@ -16,7 +16,7 @@ const Userauth = ({children}) => {
 
     },[])
   return (
-     <UserAuthContext.Provider value={{verify,logout}}>
+     <UserAuthContext.Provider value={{verify,logout,userdata,currentUser}}>
         <div>
             {children}
         </div>
@@ -32,9 +32,15 @@ export const UseOwnerAuth =()=>{
 
 const UseProviderauth=()=>{
 
+    const [currentUser,setCurrentUser] = useState([])
    
     const navigate = useNavigate()
 
+    const userdata =async ()=>{
+
+        const response = await read({userId:auth.isAuthenticated()?.user?._id},{t:auth.isAuthenticated().token})
+        setCurrentUser(response)
+    }
 
 
 
@@ -60,6 +66,6 @@ const UseProviderauth=()=>{
     }
 
     return {
-        verify,logout
+        verify,logout,userdata,currentUser
     }
 }

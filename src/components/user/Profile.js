@@ -4,6 +4,7 @@ import { UseOwnerAuth } from '../auth/Userauth'
 import { read } from './userapi';
 import auth from '../auth/authhelper';
 import { useNavigate } from 'react-router';
+import {Link} from 'react-router-dom'
 const Profile = () => {
     const navigate = useNavigate()
     const [values,setValues] = useState([])
@@ -27,7 +28,7 @@ const Profile = () => {
                     <div style={{width:'50%',border:'1px solid gray',padding:'20px'}}>
                         <p>Name: {values?.name}</p>
                         <p>Email: {values?.email}</p>
-                        <button onClick={()=>navigate('/')}>Edit Profile</button>
+                        <Link to={'/edit/' + values?._id}>Edit</Link>
                         <hr/>
                         <p>Joined On: {values?.created}</p>
                     </div>

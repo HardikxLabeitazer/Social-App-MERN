@@ -42,9 +42,9 @@ const read = async(params,credentials)=>{
 }
 
 const update = async(params,credentials,user)=>{
-
+    console.log(params,credentials,user)
     try{
-        let response = await fetch('/api/users'+params.userId,{
+        let response = await fetch('/api/users/'+params.userId,{
             method:'PUT',
             headers:{
                 'Accept':'application/json',
