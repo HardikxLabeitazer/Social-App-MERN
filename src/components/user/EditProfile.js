@@ -11,7 +11,9 @@ const EditProfile = () => {
   const [user,setUser] = useState({
     email: '',
     password: '',
-    name: ''
+    name: '',
+    about:'',
+    mobile:''
   });
   useEffect(() => {
 
@@ -32,9 +34,11 @@ const EditProfile = () => {
 }
   const clickSubmit=async ()=>{
      const userinfo = {
-       name :user?.name,
+       name :user?.name || undefined,
        email:user?.email || undefined,
-       password:user?.password || undefined
+       password:user?.password || undefined,
+       about:user?.about || undefined,
+       mobile:user?.mobile || undefined
      }
 
      update({userId:currentUser?._id},{t:auth.isAuthenticated().token},userinfo).then((data)=>{
@@ -55,6 +59,8 @@ const EditProfile = () => {
         <div style={{ width: '50%', border: '1px solid gray', padding: '20px' }}>
           <div><input type="text"  defaultValue={currentUser?.name || ""} onChange={handleChange('name')} /></div>
           <div><input type="email"  onChange={handleChange('email')} defaultValue={currentUser?.email || ""} /></div>
+          <div><input type={"text"}  onChange={handleChange('mobile')} defaultValue={currentUser?.mobile || ""} /></div>
+          <div><input type={"text"} minLength="3"  onChange={handleChange('about')} defaultValue={currentUser?.about || ""} /></div>
           <div><input type="password"  placeholder='password' onChange={handleChange('password')}  /></div>
           <div><button onClick={clickSubmit}>Update</button></div>
         </div>

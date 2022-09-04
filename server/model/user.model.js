@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    mobile:{
+        type:String,
+        
+    },
     about:{
         type:String,
         trim:true

@@ -27,10 +27,14 @@ const Profile = () => {
                 <div style={{height:'100vh',width:'100vw',display:'flex',justifyContent:'center',alignItems:'center'}}>
                     <div style={{width:'50%',border:'1px solid gray',padding:'20px'}}>
                         <p>Name: {values?.name}</p>
-                        <p>Email: {values?.email}</p>
+                        <p>Email: {values?.email}</p> 
+                        <p>{values?.about ? values.about :''}</p>
+                        <p>{values?.mobile ? values.mobile :''}</p>
                         <Link to={'/edit/' + values?._id}>Edit</Link>
                         <hr/>
+                       
                         <p>Joined On: {values?.created}</p>
+                        
                     </div>
                 </div>
             </NavBar>
