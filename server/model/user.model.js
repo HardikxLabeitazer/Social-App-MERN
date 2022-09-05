@@ -31,6 +31,14 @@ const UserSchema = new mongoose.Schema({
         required:"password is easy"
     },
     salt:String,
+    following:[{
+        type:mongoose.Schema.ObjectId,
+        ref:'User'
+    }],
+    followers:[{
+        type:mongoose.Schema.ObjectId,
+        ref:'User'
+    }]
 
 
 })

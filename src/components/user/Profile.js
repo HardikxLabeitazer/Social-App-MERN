@@ -5,13 +5,17 @@ import { read } from './userapi';
 import auth from '../auth/authhelper';
 import { useNavigate } from 'react-router';
 import {Link} from 'react-router-dom'
-const Profile = () => {
+
+const Profile = ({match}) => {
     const navigate = useNavigate()
     const [values,setValues] = useState([])
+    const urlParams =new URLSearchParams(window.location.search);
+    const id = urlParams.get('id')
     
     useEffect(()=>{
+        
       
-        read({userId:auth.isAuthenticated()?.user?._id},{t:auth.isAuthenticated().token}).then((data)=>{
+        read({userId:id},{t:auth.isAuthenticated().token}).then((data)=>{
             if(data && data.error){
                 console.log("user not found")
             }else{
@@ -30,7 +34,7 @@ const Profile = () => {
                         <p>Email: {values?.email}</p> 
                         <p>{values?.about ? values.about :''}</p>
                         <p>{values?.mobile ? values.mobile :''}</p>
-                        <Link to={'/edit/' + values?._id}>Edit</Link>
+                       { auth.isAuthenticated().user._id === id  && <Link to={'/edit/' + values?._id}>Edit</Link>}
                         <hr/>
                        
                         <p>Joined On: {values?.created}</p>

@@ -82,5 +82,33 @@ const remove = async (req,res)=>{
         })
     }
 }
+const addFollowing = async(req,res,next)=>{
+    try{
+        await User.findByIdAndUpdate(req.body.userId,{$push:{following:req.body.followId}})
+        next()
+    }catch(err){
+        return res.status(400).json({
+            error:errorHandler.getErrorMessage(err)
+        })
+    }
+}
+const addFollower = async(req,res)=>{
+    try{
+        let result = await User.findByIdAndUpdate(req.body.followId,
+            {$push:{followers:req.body.userId}},
+            {new:true})
+            .populate('following','_id name')
+            .populate('followers','_id name')
+            .exec()
+        
+            result.hashed_password = undefined;
+            result.salt = undefined;
+            res.json(result);
+    }catch(err){
+        return res.status(400).json({
+            error:errorHandler.getErrorMessage(err)
+        })
+    }
+}
 
 module.exports = {create,userByID,remove,read,update,list}

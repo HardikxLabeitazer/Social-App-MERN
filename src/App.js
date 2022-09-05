@@ -13,6 +13,7 @@ import ProtectedRoutes from './components/auth/ProtectedRoutes';
 import Profile from './components/user/Profile';
 import Userauth from './components/auth/Userauth';
 import EditProfile from './components/user/EditProfile';
+import Users from './components/user/Users';
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
         <Route exact path="/signup" element={<SignUp/>}/>
         
       
-          <Route exact path="/" element={<Profile/>}/>
+          <Route exact path="/profile" element={<Profile/>}/>
           <Route exact path ="/edit/:userId" element={<EditProfile/>}/>
+          <Route exact path ="/" element={<Users/>}/>
        
             
          
