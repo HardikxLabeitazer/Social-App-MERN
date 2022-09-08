@@ -14,8 +14,8 @@ const Profile = ({match}) => {
     const jwt = auth.isAuthenticated()
     useEffect(()=>{
         
-      
-        read({userId:id},{t:auth.isAuthenticated().token}).then((data)=>{
+      console.log('hello')
+        read({userId:id?id:auth.isAuthenticated()?.user?._id},{t:auth.isAuthenticated().token}).then((data)=>{
             if(data && data.error){
                 console.log("user not found")
             }else{
