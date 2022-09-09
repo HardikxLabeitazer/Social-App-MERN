@@ -39,7 +39,7 @@ const Users = () => {
                     {
                         users?.map((data,i)=>{
                             return (
-                               <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'5px'}}> <Link  to={"/profile?id="+data._id} style={{textDecoration:'none'}} ><p>{data.name}</p></Link><button onClick={()=>clickFollow} hidden={auth.isAuthenticated().user._id === data._id} style={{margin:'10px'}}>Follow</button></div>
+                               <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'5px'}}> <Link  to={"/profile?id="+data._id} style={{textDecoration:'none'}} ><p>{data.name}</p></Link><button onClick={()=>clickFollow(data,i)} hidden={auth.isAuthenticated().user._id === data._id} style={{margin:'10px'}}>Follow</button></div>
 
                             )
                         })

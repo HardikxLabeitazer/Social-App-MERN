@@ -31,7 +31,7 @@ const Profile = ({match}) => {
     const checkfollow =(data)=>{
 
         const match = data?.followers?.some((follower)=> {
-            return follower._id !== jwt.user._id
+            return follower._id === jwt.user._id
           })
           if(match===undefined){
             return false
@@ -69,7 +69,7 @@ const Profile = ({match}) => {
                         <p>Email: {values?.email}</p> 
                         <p>{values?.about ? values.about :''}</p>
                         <p>{values?.mobile ? values.mobile :''}</p>
-                       { auth.isAuthenticated().user?._id === id  && <Link to={'/edit/' + values?._id}>Edit</Link>}
+                       { id?auth.isAuthenticated().user?._id === id:auth.isAuthenticated().user._id  && <Link to={'/edit/' + values?._id}>Edit</Link>}
                        {auth.isAuthenticated().user?._id !== values?._id
                         && <>
                         {
